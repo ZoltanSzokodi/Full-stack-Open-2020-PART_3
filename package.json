@@ -1,0 +1,30 @@
+{
+  "name": "phonebook-backend",
+  "version": "1.0.0",
+  "description": "node.js and express app",
+  "main": "index.js",
+  "scripts": {
+    "start": "SET NODE_ENV=production & node index",
+    "dev": "nodemon index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git remote add origin https://github.com/ZoltanSzokodi/Full-stack-Open-2020-PART_3.git"
+  },
+  "keywords": [
+    "full-stack-open-2020"
+  ],
+  "author": "Zoltan Szokodi",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
