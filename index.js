@@ -29,8 +29,11 @@ let persons = [
 
 const app = express();
 
+// Body parser
 app.use(express.json());
+// CORS
 app.use(cors());
+// Serve static folder
 app.use(express.static('build'));
 
 dotenv.config({ path: './config/config.env' });
@@ -38,7 +41,7 @@ dotenv.config({ path: './config/config.env' });
 // Only run morgan in development mode
 if (process.env.NODE_ENV === 'development') {
   // Morgan customized to log req.body on post requests
-  morgan.token('req-body', function getBody(req) {
+  morgan.token('req-body', req => {
     if (req.method === 'POST') return JSON.stringify(req.body);
     return null;
   });
