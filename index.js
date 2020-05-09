@@ -10,6 +10,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const Person = require('./models/Person');
 
+const { unknownEndpoint, errorHandler } = require('./middleware/errorHandler');
+
 const app = express();
 connectDB();
 
@@ -87,6 +89,7 @@ app.put('/api/persons/:id', async (req, res, next) => {
 
     person = await Person.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
+      runValidators: true,
     });
 
     res.send(person);
@@ -105,21 +108,7 @@ app.delete('/api/persons/:id', async (req, res, next) => {
 });
 
 // Error handler middleware
-const unknownEndpoint = (req, res) => {
-  res.status(404).send({
-    error: 'unknown endpoint',
-  });
-};
-
 app.use(unknownEndpoint);
-
-const errorHandler = (err, req, res, next) => {
-  console.log(err.message);
-
-  if (err.name === 'CastError')
-    return res.status(400).send({ error: 'malformed id' });
-};
-
 app.use(errorHandler);
 
 // SERVER =======================================
