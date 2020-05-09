@@ -5,10 +5,10 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './config/config.env' });
 
 const connectDB = require('./config/db');
-const colors = require('colors');
 const morgan = require('morgan');
 const cors = require('cors');
 const Person = require('./models/Person');
+require('colors');
 
 const { unknownEndpoint, errorHandler } = require('./middleware/errorHandler');
 
@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'development') {
     if (req.method === 'POST') return JSON.stringify(req.body);
     return null;
   });
-  app.use(morgan(`:method :url :status - :response-time ms :req-body`));
+  app.use(morgan(':method :url :status - :response-time ms :req-body'));
 }
 
 // ROUTES =========================================
@@ -90,6 +90,7 @@ app.put('/api/persons/:id', async (req, res, next) => {
     person = await Person.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
+      context: 'query',
     });
 
     res.send(person);

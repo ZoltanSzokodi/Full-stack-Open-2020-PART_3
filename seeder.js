@@ -1,7 +1,7 @@
 const fs = require('fs');
-const colors = require('colors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
+require('colors');
 
 dotenv.config({ path: './config/config.env' });
 
